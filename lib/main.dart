@@ -45,9 +45,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+
+  void _sayYes() {
+
+  }
+
+  void _sayNo() {
+
+  }
+
   void _showDialog() {
-
-
 
     setState(() {
 
@@ -64,7 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
               child: new CupertinoAlertDialog(
                 title: new Text("Test 1"),
                 content: new Text("Hello World"),
-              )
+                actions: <Widget> [
+                  new CupertinoDialogAction(
+                      child: new Text("No"),
+                      onPressed: _sayNo,
+                  ),
+                  new CupertinoDialogAction(
+                      child: new Text("Yes"),
+                      isDefaultAction: true,
+                      onPressed: _sayYes,
+                  ),
+                ],
+              ),
           );
 
           break;
@@ -73,17 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
         //see https://docs.flutter.io/flutter/cupertino/CupertinoDialog-class.html
           _counter += 2;
 
-
           break;
         case 2:
         //Create a CupertinoDialogAction
         //see https://docs.flutter.io/flutter/cupertino/CupertinoDialogAction-class.html
-          showDialog(
-              context: context,
-              child: new CupertinoDialog(
-                child: new Text("Hello World"),
-              )
-          );
           break;
       }
 
@@ -99,6 +110,13 @@ class _MyHomePageState extends State<MyHomePage> {
 //            content: new Text("Hello World"),
 //          )
 //      );
+
+//          showDialog(
+//              context: context,
+//              child: new CupertinoDialog(
+//                child: new Text("Hello World"),
+//              )
+//          );
 
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
