@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 
 final ThemeData kIOSTheme = new ThemeData(
@@ -47,11 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   void _sayYes() {
-
+    Navigator.pop(context);
   }
 
   void _sayNo() {
-
+    Navigator.pop(context);
   }
 
   void _showDialog() {
@@ -69,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
           showDialog(
               context: context,
               child: new CupertinoAlertDialog(
-                title: new Text("Test 1"),
+                title: new Text("Test2"),
                 content: new Text("Hello World"),
                 actions: <Widget> [
                   new CupertinoDialogAction(
@@ -135,46 +134,49 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return new Scaffold(
-      appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
+    return new CupertinoTabScaffold(
+      tabBar: new CupertinoTabBar(
+        items: <BottomNavigationBarItem> [
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.people),
+              title: new Text(" ")
+          ),
+          new BottomNavigationBarItem(
+              icon: new Icon(Icons.notifications),
+              title: new Text(" ")
+          ),
+        ],
       ),
-      body: new Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
-            ),
-            new Text(
-              '${_counter}',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _showDialog,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      tabBuilder: (BuildContext context, int index) {
+        return new CupertinoTabView(
+          builder: (BuildContext context) {
+            switch (index) {
+              case 0:
+                return new CupertinoPageScaffold(
+                  navigationBar: new CupertinoNavigationBar(
+                    middle: new Text('Family Members'),
+                  ),
+                  child: new Center(
+                    child: new Text("Page $index"),
+                  ),
+                );
+                break;
+              case 1:
+                return new CupertinoPageScaffold(
+                  navigationBar: new CupertinoNavigationBar(
+                    middle: new Text('Notifications'),
+                  ),
+                  child: new Center(
+                    child: new Text("Page $index"),
+                  ),
+                );
+                break;
+            }
+
+          },
+        );
+      },
     );
+    //end..
   }
 }
