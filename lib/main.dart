@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _showDialog() {
-    setState(() {
+//    setState(() {
       //TODO: Here we want to show a dialog.
       //showDialog: https://docs.flutter.io/flutter/material/showDialog.html
 
@@ -78,131 +78,143 @@ class _MyHomePageState extends State<MyHomePage> {
       //Create a CupertinoDialogAction
       //see https://docs.flutter.io/flutter/cupertino/CupertinoDialogAction-class.html
 
-    });
+//    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new CupertinoTabScaffold(
-      tabBar: new CupertinoTabBar(
-        items: <BottomNavigationBarItem>[
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.people),
-            title: new Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: new Text(
-                  "Family",
-                  textScaleFactor: 1.0,
-                  style: Theme.of(context).textTheme.subhead
+    return new DefaultTextStyle(
+        style: new TextStyle(
+          fontFamily: "Roboto"
+        ),
+        child: new CupertinoTabScaffold(
+          tabBar: new CupertinoTabBar(
+            items: <BottomNavigationBarItem>[
+              new BottomNavigationBarItem(
+                icon: new Icon(Icons.people),
+                title: new Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(2.0),
+                  child: new Text(
+                    "Family",
+                    textScaleFactor: .80,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.subhead,
+                  ),
+                ),
               ),
-            ),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.notifications),
-            title: new Container(
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              child: new Text(
-                  "Notifications",
-                  textScaleFactor: 1.0,
-                  style: Theme.of(context).textTheme.subhead
-              ),
-            ),
-          ),
-        ],
-      ),
-      tabBuilder: (BuildContext context, int index) {
-        return new CupertinoTabView(
-          builder: (BuildContext context) {
-            switch (index) {
-              case 0:
-                return new CupertinoPageScaffold(
-                  navigationBar: new CupertinoNavigationBar(
-                    middle: new Container(
-                      child: new Text(
-                        'Family Members',
-                        style: Theme.of(context).textTheme.subhead,
-                        textDirection: TextDirection.ltr,
-                      ),
-                    ),
-                    trailing: new Material(
-                      child: new IconButton(
-                          icon: new Icon(Icons.add),
-                          onPressed: _showDialog,
-                      ),
-                    ),
-                  ),
-                  child: new Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Divider(height: 75.0),
-                        new Row(
-                         children: <Widget>[
-                           new Expanded(
-                             child: new Text(
-                               'Deliver features faster',
-                               textAlign: TextAlign.center,
-                               textScaleFactor: 1.0,
-                               textDirection: TextDirection.ltr,
-                               style: Theme.of(context).textTheme.subhead,
-                             ),
-                           ),
-                         ],
-
-                        ),
-                        new Expanded(
-                          child: new Text(
-                            'Deliver features faster',
-                            textAlign: TextAlign.center,
-                            textScaleFactor: 1.0,
-                            textDirection: TextDirection.ltr,
-                            style: Theme.of(context).textTheme.subhead,
-
-                          ),
-                        ),
-                        new Expanded(
-                          child: new Text(
-                            'Deliver features faster',
-                            textAlign: TextAlign.center,
-                            textScaleFactor: 1.0,
-                            textDirection: TextDirection.ltr,
-                            style: Theme.of(context).textTheme.subhead,
-                            overflow: TextOverflow.clip,
-                            softWrap: true,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                  ),
-                );
-                break;
-              case 1:
-                return new CupertinoPageScaffold(
-                  navigationBar: new CupertinoNavigationBar(
-                    middle: const Text(
-                      'Notifications'
-                    ),
-                  ),
-                  child: new Center(
+              new BottomNavigationBarItem(
+                icon: new Icon(Icons.notifications),
+                title: new Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: new Material(
                     child: new Text(
-                      'Test Text',
-                      textAlign: TextAlign.center,
-                      textScaleFactor: 1.0,
-                      textDirection: TextDirection.ltr,
-                      style: Theme.of(context).textTheme.subhead,
-                      overflow: TextOverflow.clip,
-                      softWrap: true,
+                        "Notifications",
+                        textScaleFactor: 1.0,
+                        style: Theme.of(context).textTheme.subhead
                     ),
                   ),
-                );
-                break;
-            }
+
+
+                ),
+              ),
+            ],
+          ),
+          tabBuilder: (BuildContext context, int index) {
+            return new CupertinoTabView(
+              builder: (BuildContext context) {
+                switch (index) {
+                  case 0:
+                    return new CupertinoPageScaffold(
+                      navigationBar: new CupertinoNavigationBar(
+                        middle: new Container(
+                          child: new Text(
+                            'Family Members',
+                            style: Theme.of(context).textTheme.subhead,
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                        trailing: new Material(
+                          child: new IconButton(
+                            icon: new Icon(Icons.add),
+                            onPressed: _showDialog,
+                          ),
+                        ),
+                      ),
+                      child: new Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Divider(height: 75.0),
+                            new Row(
+                              children: <Widget>[
+                                new Expanded(
+                                  child: new Text(
+                                    'Deliver features faster',
+                                    textAlign: TextAlign.center,
+                                    textScaleFactor: 1.0,
+                                    textDirection: TextDirection.ltr,
+                                    style: Theme.of(context).textTheme.subhead,
+                                  ),
+                                ),
+                              ],
+
+                            ),
+                            new Expanded(
+                              child: new Text(
+                                'Deliver features faster',
+                                textAlign: TextAlign.center,
+                                textScaleFactor: 1.0,
+                                textDirection: TextDirection.ltr,
+                                style: Theme.of(context).textTheme.subhead,
+
+                              ),
+                            ),
+                            new Expanded(
+                              child: new Text(
+                                'Deliver features faster',
+                                textAlign: TextAlign.center,
+                                textScaleFactor: 1.0,
+                                textDirection: TextDirection.ltr,
+                                style: Theme.of(context).textTheme.subhead,
+                                overflow: TextOverflow.clip,
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ),
+                    );
+                    break;
+                  case 1:
+                    return new CupertinoPageScaffold(
+                      navigationBar: new CupertinoNavigationBar(
+                        middle: const Text(
+                            'Notifications'
+                        ),
+                      ),
+                      child: new Center(
+                        child: new Text(
+                          'Test Text',
+                          textAlign: TextAlign.center,
+                          textScaleFactor: 1.0,
+                          textDirection: TextDirection.ltr,
+                          style: Theme.of(context).textTheme.subhead,
+                          overflow: TextOverflow.clip,
+                          softWrap: true,
+                        ),
+                      ),
+                    );
+                    break;
+                }
+              },
+            );
           },
-        );
-      },
+        )
     );
+
     //end..
   }
 }
