@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+//my own imports
+import 'family.dart';
+import 'notifications.dart';
+
 final ThemeData kIOSTheme = new ThemeData(
   primarySwatch: Colors.blueGrey,
   primaryColor: Colors.grey[100],
@@ -34,53 +38,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _sayYes() {
-    Navigator.pop(context);
-    //TODO: Create a dialog for Adding a family member..
-    //
-  }
-
-  void _sayNo() {
-    Navigator.pop(context);
-  }
-
-  void _showDialog() {
-//    setState(() {
-      //TODO: Here we want to show a dialog.
-      //showDialog: https://docs.flutter.io/flutter/material/showDialog.html
-
-      //Create a CupertinoAlertDialog
-      //see https://docs.flutter.io/flutter/cupertino/CupertinoAlertDialog-class.html
-//      _counter += 1;
-
-      showDialog(
-        context: context,
-        child: new CupertinoAlertDialog(
-          title: new Text("Test2"),
-          content: new Text("Hello World"),
-          actions: <Widget>[
-            new CupertinoDialogAction(
-              child: new Text("No"),
-              onPressed: _sayNo,
-            ),
-            new CupertinoDialogAction(
-              child: new Text("Yes"),
-              isDefaultAction: true,
-              onPressed: _sayYes,
-            ),
-          ],
-        ),
-      );
-
-      //Create a CupertinoDialog
-      //see https://docs.flutter.io/flutter/cupertino/CupertinoDialog-class.html
-
-      //Create a CupertinoDialogAction
-      //see https://docs.flutter.io/flutter/cupertino/CupertinoDialogAction-class.html
-
-//    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new DefaultTextStyle(
@@ -91,10 +48,25 @@ class _MyHomePageState extends State<MyHomePage> {
           tabBar: new CupertinoTabBar(
             items: <BottomNavigationBarItem>[
               new BottomNavigationBarItem(
-                icon: new Icon(Icons.people),
+                icon: new Container(
+                    margin: const EdgeInsets.only(
+                      left: 10.0,
+                      top: 10.0,
+                      right: 10.0,
+                      bottom: 0.0,
+                    ),
+                    child: new Icon(
+                        Icons.people,
+                    ),
+                  ),
                 title: new Container(
-                  margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(2.0),
+                  margin: const EdgeInsets.only(
+                      left: 10.0,
+                      top: 0.0,
+                      right: 10.0,
+                      bottom: 0.0,
+                  ),
+                  padding: const EdgeInsets.all(0.0),
                   child: new Text(
                     "Family",
                     textScaleFactor: .80,
@@ -104,18 +76,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               new BottomNavigationBarItem(
-                icon: new Icon(Icons.notifications),
-                title: new Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: new Material(
-                    child: new Text(
-                        "Notifications",
-                        textScaleFactor: 1.0,
-                        style: Theme.of(context).textTheme.subhead
-                    ),
+                icon: new Container(
+                  margin: const EdgeInsets.only(
+                    left: 10.0,
+                    top: 10.0,
+                    right: 10.0,
+                    bottom: 0.0,
                   ),
-
-
+                  child: new Icon(
+                      Icons.notifications,
+                  ),
+                ),
+                title: new Container(
+                  margin: const EdgeInsets.only(
+                    left: 10.0,
+                    top: 0.0,
+                    right: 10.0,
+                    bottom: 0.0,
+                  ),
+                  padding: const EdgeInsets.all(0.0),
+                  child: new Text(
+                    "Notifications",
+                    textScaleFactor: .80,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.subhead,
+                  ),
                 ),
               ),
             ],
@@ -125,68 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (BuildContext context) {
                 switch (index) {
                   case 0:
-                    return new CupertinoPageScaffold(
-                      navigationBar: new CupertinoNavigationBar(
-                        middle: new Container(
-                          child: new Text(
-                            'Family Members',
-                            style: Theme.of(context).textTheme.subhead,
-                            textDirection: TextDirection.ltr,
-                          ),
-                        ),
-                        trailing: new Material(
-                          child: new IconButton(
-                            icon: new Icon(Icons.add),
-                            onPressed: _showDialog,
-                          ),
-                        ),
-                      ),
-                      child: new Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            new Divider(height: 75.0),
-                            new Row(
-                              children: <Widget>[
-                                new Expanded(
-                                  child: new Text(
-                                    'Deliver features faster',
-                                    textAlign: TextAlign.center,
-                                    textScaleFactor: 1.0,
-                                    textDirection: TextDirection.ltr,
-                                    style: Theme.of(context).textTheme.subhead,
-                                  ),
-                                ),
-                              ],
-
-                            ),
-                            new Expanded(
-                              child: new Text(
-                                'Deliver features faster',
-                                textAlign: TextAlign.center,
-                                textScaleFactor: 1.0,
-                                textDirection: TextDirection.ltr,
-                                style: Theme.of(context).textTheme.subhead,
-
-                              ),
-                            ),
-                            new Expanded(
-                              child: new Text(
-                                'Deliver features faster',
-                                textAlign: TextAlign.center,
-                                textScaleFactor: 1.0,
-                                textDirection: TextDirection.ltr,
-                                style: Theme.of(context).textTheme.subhead,
-                                overflow: TextOverflow.clip,
-                                softWrap: true,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                      ),
-                    );
+                      return new FamilyMemberPage();
                     break;
                   case 1:
                     return new CupertinoPageScaffold(
