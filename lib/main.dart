@@ -113,24 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       return new FamilyMemberPage();
                     break;
                   case 1:
-                    return new CupertinoPageScaffold(
-                      navigationBar: new CupertinoNavigationBar(
-                        middle: const Text(
-                            'Notifications'
-                        ),
-                      ),
-                      child: new Center(
-                        child: new Text(
-                          'Test Text',
-                          textAlign: TextAlign.center,
-                          textScaleFactor: 1.0,
-                          textDirection: TextDirection.ltr,
-                          style: Theme.of(context).textTheme.subhead,
-                          overflow: TextOverflow.clip,
-                          softWrap: true,
-                        ),
-                      ),
-                    );
+                      return new NotificationsPage();
                     break;
                 }
               },
