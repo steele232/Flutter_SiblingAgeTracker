@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new DefaultTextStyle(
         style: new TextStyle(
-          fontFamily: "Roboto"
+          fontFamily: "Roboto",
         ),
         child: new CupertinoTabScaffold(
           tabBar: new CupertinoTabBar(

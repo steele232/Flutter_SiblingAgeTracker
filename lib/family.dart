@@ -79,28 +79,6 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
                   ),
                 ),
               ],
-
-            ),
-            new Expanded(
-              child: new Text(
-                'Deliver features faster',
-                textAlign: TextAlign.center,
-                textScaleFactor: 1.0,
-                textDirection: TextDirection.ltr,
-                style: Theme.of(context).textTheme.subhead,
-
-              ),
-            ),
-            new Expanded(
-              child: new Text(
-                'Deliver features faster',
-                textAlign: TextAlign.center,
-                textScaleFactor: 1.0,
-                textDirection: TextDirection.ltr,
-                style: Theme.of(context).textTheme.subhead,
-                overflow: TextOverflow.clip,
-                softWrap: true,
-              ),
             ),
           ],
         ),

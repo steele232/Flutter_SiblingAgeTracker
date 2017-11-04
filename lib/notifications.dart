@@ -16,8 +16,10 @@ class NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return new CupertinoPageScaffold(
       navigationBar: new CupertinoNavigationBar(
-        middle: const Text(
-            'Notifications'
+        middle: new Text(
+            'Notifications',
+            style: Theme.of(context).textTheme.subhead,
+            textDirection: TextDirection.ltr,
         ),
       ),
       child: new Center(
