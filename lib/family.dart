@@ -9,7 +9,7 @@ class FamilyMemberPage extends StatefulWidget {
 }
 
 class FamilyMemberPageState extends State<FamilyMemberPage> {
-  final List<FamilyMember> _familyMembers = <FamilyMember>[];
+  List<FamilyMember> _familyMembers = <FamilyMember>[];
 
   void _sayYes() {
     Navigator.pop(context);
@@ -24,8 +24,8 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     showDialog(
       context: context,
       child: new CupertinoAlertDialog(
-        title: new Text("Test2"),
-        content: new Text("Hello World"),
+        title: new Text("Add a Family Member"),
+        content: new Text("Are you sure?"),
         actions: <Widget>[
           new CupertinoDialogAction(
             child: new Text("No"),
@@ -41,11 +41,44 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     );
   }
 
+  Widget _itemBuilder (BuildContext context, int index) {
+    FamilyMember familyMember = getFM(index);
+
+    return new FamilyMemberWidget(familyMember: familyMember);
+  }
+
+  FamilyMember getFM(int index) {
+    return _familyMembers[index];
+  }
 
   @override
   Widget build(BuildContext context) {
 
     //TODO first let's make a hard copy of the familyMembers I want to see.
+
+
+    _familyMembers = <FamilyMember> [
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
+    ];
 
 
     return new CupertinoPageScaffold(
@@ -65,40 +98,21 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         ),
       ),
       child: new Container(
+//        width: 350.0,
+//        constraints: new ConstrainedBox(constraints: ),
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             new Divider(height: 75.0),
-            new Container(
-            child: new Column(
-                children: <Widget>[
-                  new Flexible(
-                      child: new ListView.builder(
-                        padding: new EdgeInsets.all(8.0),
-                        reverse: true,
-                        itemBuilder: (_,  int index) => _familyMembers[index],
-                        itemCount: _familyMembers.length,
-                      )
-                  ),
-//                  new Divider(height: 1.0),
-//                  new Container(
-//                    decoration: new BoxDecoration(
-//                        color: Theme.of(context).cardColor
-//                    ),
-//                    child: _buildTextComposer(),
-//                  ),
-                ]
-            ),
-            decoration: Theme.of(context).platform == TargetPlatform.iOS
-                ? new BoxDecoration(
-                border:
-                new Border(top: new BorderSide(color: Colors.grey[200])))
-                : null),
+            new ListView.builder(
+                padding: new EdgeInsets.symmetric(horizontal: 8.0),
+                shrinkWrap: true,
+                itemBuilder: _itemBuilder,
+                itemCount: _familyMembers.length,
             ),
           ],
-        ),
-
+        )
       ),
     );
   }
@@ -112,23 +126,24 @@ class FamilyMemberWidget extends StatefulWidget {
   final FamilyMember familyMember;
 
   @override
-  FamilyMemberWidgetState createState() => new FamilyMemberWidgetState();
+  FamilyMemberWidgetState createState() => new FamilyMemberWidgetState(familyMember: familyMember);
 }
 
 class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
-  FamilyMemberWidgetState({Key key, this.familyMember}) : super(key: key);
+  FamilyMemberWidgetState({Key key, this.familyMember});
 
   final FamilyMember familyMember;
 
   @override
   Widget build(BuildContext context) {
-    return new ListTile(
-      leading: new Text(familyMember.name),
-      trailing: new Text('age'),
-
-//      Image.asset(widget.spec.pic.assetName),
-      //title: new Text(widget.spec.name),
-      onTap: _onTap,
+    return new Material(
+      color: Colors.grey[100],
+//      type: Material.of(context),
+      child: new ListTile(
+        leading: new Text(familyMember.name),
+        trailing: new Text(familyMember.birthDate),
+        onTap: _onTap,
+      ),
     );
   }
 
@@ -147,7 +162,7 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
     showDialog(
       context: context,
       child: new CupertinoAlertDialog(
-        title: new Text(familyMember.name),
+        title: new Text("Edit Details"),
         content: new Text("Do you want to edit " + familyMember.name + "?"),
         actions: <Widget>[
           new CupertinoDialogAction(
