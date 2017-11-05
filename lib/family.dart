@@ -63,12 +63,12 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         "01/05/1995",
       ),
       new FamilyMember(
-        "Jonathan",
-        "01/05/1995",
+        "Sara",
+        "04/29/1997",
       ),
       new FamilyMember(
-        "Jonathan",
-        "01/05/1995",
+        "Stephanie",
+        "02/01/1997",
       ),
       new FamilyMember(
         "Jonathan",
@@ -100,7 +100,7 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
       child: new Container(
 //        width: 350.0,
 //        constraints: new ConstrainedBox(constraints: ),
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+//        margin: const EdgeInsets.symmetric(horizontal: 8.0),
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -137,10 +137,15 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
   @override
   Widget build(BuildContext context) {
     return new Material(
-      color: Colors.grey[100],
-//      type: Material.of(context),
+      color: Colors.grey[80],
+      type: MaterialType.transparency,
       child: new ListTile(
-        leading: new Text(familyMember.name),
+        leading: new CircleAvatar(child: new Text(familyMember.name.substring(0, 1)),),
+        title: new Container(
+//            width: 80.0,
+            child: new Text(familyMember.name),
+        ),
+        subtitle: new Text(familyMember.birthDate),
         trailing: new Text(familyMember.birthDate),
         onTap: _onTap,
       ),
@@ -148,7 +153,7 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
   }
 
   /*
-  //TODO Dialog for Editing a Family Member
+  TODO Dialog for Editing a Family Member
    */
   void _sayYes() {
     Navigator.pop(context);
