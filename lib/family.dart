@@ -9,7 +9,7 @@ class FamilyMemberPage extends StatefulWidget {
 }
 
 class FamilyMemberPageState extends State<FamilyMemberPage> {
-
+  final List<FamilyMember> _familyMembers = <FamilyMember>[];
 
   void _sayYes() {
     Navigator.pop(context);
@@ -44,6 +44,10 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //TODO first let's make a hard copy of the familyMembers I want to see.
+
+
     return new CupertinoPageScaffold(
       navigationBar: new CupertinoNavigationBar(
         middle: new Container(
@@ -66,18 +70,31 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Divider(height: 75.0),
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new Text(
-                    'Deliver features faster',
-                    textAlign: TextAlign.center,
-                    textScaleFactor: 1.0,
-                    textDirection: TextDirection.ltr,
-                    style: Theme.of(context).textTheme.subhead,
+            new Container(
+            child: new Column(
+                children: <Widget>[
+                  new Flexible(
+                      child: new ListView.builder(
+                        padding: new EdgeInsets.all(8.0),
+                        reverse: true,
+                        itemBuilder: (_,  int index) => _familyMembers[index],
+                        itemCount: _familyMembers.length,
+                      )
                   ),
-                ),
-              ],
+//                  new Divider(height: 1.0),
+//                  new Container(
+//                    decoration: new BoxDecoration(
+//                        color: Theme.of(context).cardColor
+//                    ),
+//                    child: _buildTextComposer(),
+//                  ),
+                ]
+            ),
+            decoration: Theme.of(context).platform == TargetPlatform.iOS
+                ? new BoxDecoration(
+                border:
+                new Border(top: new BorderSide(color: Colors.grey[200])))
+                : null),
             ),
           ],
         ),
@@ -89,12 +106,10 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
 
 
-
 class FamilyMemberWidget extends StatefulWidget {
   FamilyMemberWidget({Key key, this.familyMember}) : super(key: key);
 
   final FamilyMember familyMember;
-
 
   @override
   FamilyMemberWidgetState createState() => new FamilyMemberWidgetState();
@@ -118,10 +133,11 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
   }
 
   /*
-  Dialog stuff.
+  //TODO Dialog for Editing a Family Member
    */
   void _sayYes() {
     Navigator.pop(context);
+    //
   }
   void _sayNo() {
     Navigator.pop(context);
@@ -131,8 +147,8 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
     showDialog(
       context: context,
       child: new CupertinoAlertDialog(
-        title: new Text(familyMem),
-        content: new Text("Hello World"),
+        title: new Text(familyMember.name),
+        content: new Text("Do you want to edit " + familyMember.name + "?"),
         actions: <Widget>[
           new CupertinoDialogAction(
             child: new Text("No"),
