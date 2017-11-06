@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fluro/fluro.dart';
+
 //my own imports
 import 'family.dart';
 import 'notifications.dart';
+import 'theme.dart';
 
-final ThemeData kIOSTheme = new ThemeData(
-  primarySwatch: Colors.blueGrey,
-  primaryColor: Colors.grey[100],
-  primaryColorBrightness: Brightness.light,
-);
+
 
 void main() {
   runApp(new MyApp());
@@ -46,8 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: new CupertinoTabScaffold(
           tabBar: new CupertinoTabBar(
+            backgroundColor: kIOSTheme.backgroundColor, // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
             items: <BottomNavigationBarItem>[
               new BottomNavigationBarItem(
+                backgroundColor: kIOSTheme.backgroundColor, // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
                 icon: new Container(
                     margin: const EdgeInsets.only(
                       left: 10.0,
@@ -76,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               new BottomNavigationBarItem(
+                backgroundColor: kIOSTheme.backgroundColor, // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
                 icon: new Container(
                   margin: const EdgeInsets.only(
                     left: 10.0,

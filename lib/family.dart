@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'familymember.dart';
+
+import 'theme.dart';
+
 
 class FamilyMemberPage extends StatefulWidget {
 
@@ -41,23 +45,19 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     );
   }
 
-  Widget _itemBuilder (BuildContext context, int index) {
-    FamilyMember familyMember = getFM(index);
 
-    return new FamilyMemberWidget(familyMember: familyMember);
-  }
-
-  FamilyMember getFM(int index) {
-    return _familyMembers[index];
-  }
 
   @override
   Widget build(BuildContext context) {
 
-    //TODO first let's make a hard copy of the familyMembers I want to see.
-
+    //For now, let's make a hard copy of the familyMembers I want to see.
+    //TODO Use Firebase or some other Data Service to populate the list
 
     _familyMembers = <FamilyMember> [
+      new FamilyMember(
+        "Jonathan",
+        "01/05/1995",
+      ),
       new FamilyMember(
         "Jonathan",
         "01/05/1995",
@@ -71,18 +71,39 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         "02/01/1997",
       ),
       new FamilyMember(
-        "Jonathan",
-        "01/05/1995",
+        "Spencer",
+        "07/29/1992",
       ),
       new FamilyMember(
-        "Jonathan",
-        "01/05/1995",
+        "Timothy",
+        "07/29/1992",
+      ),
+      new FamilyMember(
+        "Austin",
+        "07/29/1992",
+      ),
+      new FamilyMember(
+        "Austin",
+        "07/29/1992",
+      ),
+      new FamilyMember(
+        "Austin",
+        "07/29/1992",
+      ),
+      new FamilyMember(
+        "Austin",
+        "07/29/1992",
+      ),
+      new FamilyMember(
+        "Austin",
+        "07/29/1992",
       ),
     ];
 
 
     return new CupertinoPageScaffold(
       navigationBar: new CupertinoNavigationBar(
+        backgroundColor: const Color(0xFFF8F8F8), // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
         middle: new Container(
           child: new Text(
             'Family Members',
@@ -97,24 +118,50 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
           ),
         ),
       ),
-      child: new Container(
+
+      child: new ListView(
+        children: _familyMembers.map((FamilyMember familyMember) {
+          return new FamilyMemberWidget(familyMember: familyMember,);
+        }).toList(),
+      ),
+
+//      child: new Container(
+//        height: 700.0,
 //        width: 350.0,
 //        constraints: new ConstrainedBox(constraints: ),
 //        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            new Divider(height: 75.0),
-            new ListView.builder(
-                padding: new EdgeInsets.symmetric(horizontal: 8.0),
-                shrinkWrap: true,
-                itemBuilder: _itemBuilder,
-                itemCount: _familyMembers.length,
-            ),
-          ],
-        )
-      ),
+
+//        child: new Column(
+//          mainAxisSize: MainAxisSize.max,
+//          children: <Widget>[
+//            new Divider(height: 69.0),
+//            new ListView(
+//              children: _familyMembers.map((FamilyMember familyMember) {
+//                return new FamilyMemberWidget(familyMember: familyMember,);
+//              }).toList(),
+//            ),
+
+//            new ListView.builder(
+//                padding: new EdgeInsets.symmetric(horizontal: 8.0),
+//                shrinkWrap: true,                    //taking out this line breaks the app.
+//                itemBuilder: _itemBuilder,
+//                itemCount: 6,
+////                itemExtent: 60.0,
+//            ),
+//          ],
+//        ),
+//      ),
     );
+  }
+
+  Widget _itemBuilder (BuildContext context, int index) {
+    FamilyMember familyMember = getFM(index);
+
+    return new FamilyMemberWidget(familyMember: familyMember);
+  }
+
+  FamilyMember getFM(int index) {
+    return _familyMembers[index];
   }
 }
 
@@ -142,7 +189,6 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
       child: new ListTile(
         leading: new CircleAvatar(child: new Text(familyMember.name.substring(0, 1)),),
         title: new Container(
-//            width: 80.0,
             child: new Text(familyMember.name),
         ),
         subtitle: new Text(familyMember.birthDate),
