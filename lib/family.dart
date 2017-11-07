@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'familymember.dart';
+import 'dart:async';
 
+import 'familymember.dart';
 import 'theme.dart';
-import 'addNewFM.dart';
+import 'addNewFM.dart'; //also includes FMSave
 
 
 class FamilyMemberPage extends StatefulWidget {
@@ -16,22 +17,24 @@ class FamilyMemberPage extends StatefulWidget {
 class FamilyMemberPageState extends State<FamilyMemberPage> {
   List<FamilyMember> _familyMembers = <FamilyMember>[];
 
-  void _sayYes() {
-    Navigator.pop(context);
-    //TODO: Create a dialog for Adding a family member..
-  }
-
-  void _sayNo() {
-    Navigator.pop(context);
-  }
-
-  void _showFullDialog() {
-    Navigator.of(context).push(new MaterialPageRoute<Null>(
+  //TODO: Create a dialog for Adding a family member..
+  Future _showFullAddDialog() async {
+    FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
         builder: (BuildContext context) {
           return new AddEntryDialog(); //Will need to change name later as we go on.
         },
-        fullscreenDialog: true
+        maintainState: true,
+        fullscreenDialog: true,
     ));
+    if (save != null) {
+      _addFamilyMemberSave(save);
+    }
+  }
+
+  void _addFamilyMemberSave(FMSave save) {
+    setState(() {
+      _familyMembers.add(new FamilyMember(save.name, save.date));
+    });
   }
 
 
@@ -87,7 +90,7 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         trailing: new Material(
           child: new IconButton(
             icon: new Icon(Icons.add),
-            onPressed: _showFullDialog,
+            onPressed: _showFullAddDialog,
           ),
         ),
       ),
@@ -100,11 +103,11 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     );
   }
 
-  Widget _itemBuilder (BuildContext context, int index) {
-    FamilyMember familyMember = getFM(index);
-
-    return new FamilyMemberWidget(familyMember: familyMember);
-  }
+//  Widget _itemBuilder (BuildContext context, int index) {
+//    FamilyMember familyMember = getFM(index);
+//
+//    return new FamilyMemberWidget(familyMember: familyMember);
+//  }
 
   FamilyMember getFM(int index) {
     return _familyMembers[index];
@@ -174,11 +177,6 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
         ],
       ),
     );
-
-//    Route route = new MaterialPageRoute(
-//      settings: new RouteSettings(name: "/specs/spec"),
-//      builder: (BuildContext context) => new SpecPage(spec: widget.spec),
-//    );
-//    Navigator.of(context).push(route);
   }
 }
+
