@@ -58,10 +58,9 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                   onPressed: () {
                     //collect and put into a FMSave
                       //RELY ON THE STATE.
-                    FMSave save = new FMSave('Jonathan STEELE', '01/05/1995');
 
                     //pop the FMSave
-                    Navigator.of(context).pop(save);
+                    Navigator.of(context).pop(new FMSave('Jonathan STEELE', '01/05/1995'));
                   },
                 )
               ),

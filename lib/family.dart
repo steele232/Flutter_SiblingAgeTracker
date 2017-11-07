@@ -17,33 +17,9 @@ class FamilyMemberPage extends StatefulWidget {
 class FamilyMemberPageState extends State<FamilyMemberPage> {
   List<FamilyMember> _familyMembers = <FamilyMember>[];
 
-  //TODO: Create a dialog for Adding a family member..
-  Future _showFullAddDialog() async {
-    FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
-        builder: (BuildContext context) {
-          return new AddEntryDialog(); //Will need to change name later as we go on.
-        },
-        maintainState: true,
-        fullscreenDialog: true,
-    ));
-    if (save != null) {
-      _addFamilyMemberSave(save);
-    }
-  }
-
-  void _addFamilyMemberSave(FMSave save) {
-    setState(() {
-      _familyMembers.add(new FamilyMember(save.name, save.date));
-    });
-  }
-
-
 
   @override
-  Widget build(BuildContext context) {
-
-    //For now, let's make a hard copy of the familyMembers I want to see.
-    //TODO Use Firebase or some other Data Service to populate the list
+  void initState() {
 
     _familyMembers = <FamilyMember> [
       new FamilyMember(
@@ -75,6 +51,59 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         "01/16/1988",
       ),
     ];
+  }
+
+
+  //TODO: Create a dialog for Adding a family member..
+  Future _showFullAddDialog() async {
+    FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
+        builder: (BuildContext context) {
+          return new AddEntryDialog(); //Will need to change name later as we go on.
+        },
+//        maintainState: true,
+        fullscreenDialog: true,
+    ));
+
+
+
+    if (save != null) {
+//      showDialog(
+//        context: context,
+//        child: new CupertinoAlertDialog(
+//          title: new Text("Edit Details"),
+//          content: new Text("Do you want to edit " + save.name + " with a date of " + save.date + "?"),
+//          actions: <Widget>[
+//            new CupertinoDialogAction(
+//              child: new Text("No"),
+//              onPressed: null,
+//            ),
+//            new CupertinoDialogAction(
+//              child: new Text("Yes"),
+//              isDefaultAction: true,
+//              onPressed: (() { Navigator.pop(context); } ),
+//            ),
+//          ],
+//        ),
+//      );
+
+      _addFamilyMemberSave(save);
+    }
+  }
+
+  void _addFamilyMemberSave(FMSave save) {
+    setState(() {
+      _familyMembers.add(new FamilyMember(save.name, save.date));
+    });
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    //For now, let's make a hard copy of the familyMembers I want to see.
+    //TODO Use Firebase or some other Data Service to populate the list
+
 
 
     return new CupertinoPageScaffold(
