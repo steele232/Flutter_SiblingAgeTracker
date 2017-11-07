@@ -59,10 +59,6 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         "01/05/1995",
       ),
       new FamilyMember(
-        "Jonathan",
-        "01/05/1995",
-      ),
-      new FamilyMember(
         "Sara",
         "04/29/1997",
       ),
@@ -83,20 +79,8 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         "07/29/1992",
       ),
       new FamilyMember(
-        "Austin",
-        "07/29/1992",
-      ),
-      new FamilyMember(
-        "Austin",
-        "07/29/1992",
-      ),
-      new FamilyMember(
-        "Austin",
-        "07/29/1992",
-      ),
-      new FamilyMember(
-        "Austin",
-        "07/29/1992",
+        "Elise",
+        "01/16/1988",
       ),
     ];
 
@@ -124,33 +108,6 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
           return new FamilyMemberWidget(familyMember: familyMember,);
         }).toList(),
       ),
-
-//      child: new Container(
-//        height: 700.0,
-//        width: 350.0,
-//        constraints: new ConstrainedBox(constraints: ),
-//        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-
-//        child: new Column(
-//          mainAxisSize: MainAxisSize.max,
-//          children: <Widget>[
-//            new Divider(height: 69.0),
-//            new ListView(
-//              children: _familyMembers.map((FamilyMember familyMember) {
-//                return new FamilyMemberWidget(familyMember: familyMember,);
-//              }).toList(),
-//            ),
-
-//            new ListView.builder(
-//                padding: new EdgeInsets.symmetric(horizontal: 8.0),
-//                shrinkWrap: true,                    //taking out this line breaks the app.
-//                itemBuilder: _itemBuilder,
-//                itemCount: 6,
-////                itemExtent: 60.0,
-//            ),
-//          ],
-//        ),
-//      ),
     );
   }
 
