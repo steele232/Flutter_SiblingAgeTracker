@@ -31,7 +31,9 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                 })
               ),
           ),
-          middle: new Text('Add Family Member'),
+          middle: new Text('Add Family Member',
+            style: Theme.of(context).textTheme.subhead,
+          ),
           trailing: new Material(
             child: new IconButton(
               icon: new Icon(Icons.add),
