@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           fontFamily: "Roboto",
         ),
         child: new CupertinoTabScaffold(
+
           tabBar: new CupertinoTabBar(
             backgroundColor: kIOSTheme.backgroundColor, // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
             items: <BottomNavigationBarItem>[

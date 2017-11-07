@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'familymember.dart';
 
 import 'theme.dart';
+import 'addNewFM.dart';
 
 
 class FamilyMemberPage extends StatefulWidget {
@@ -24,25 +25,13 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     Navigator.pop(context);
   }
 
-  void _showDialog() {
-    showDialog(
-      context: context,
-      child: new CupertinoAlertDialog(
-        title: new Text("Add a Family Member"),
-        content: new Text("Are you sure?"),
-        actions: <Widget>[
-          new CupertinoDialogAction(
-            child: new Text("No"),
-            onPressed: _sayNo,
-          ),
-          new CupertinoDialogAction(
-            child: new Text("Yes"),
-            isDefaultAction: true,
-            onPressed: _sayYes,
-          ),
-        ],
-      ),
-    );
+  void _showFullDialog() {
+    Navigator.of(context).push(new MaterialPageRoute<Null>(
+        builder: (BuildContext context) {
+          return new AddEntryDialog(); //Will need to change name later as we go on.
+        },
+        fullscreenDialog: true
+    ));
   }
 
 
@@ -87,7 +76,7 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
     return new CupertinoPageScaffold(
       navigationBar: new CupertinoNavigationBar(
-        backgroundColor: const Color(0xFFF8F8F8), // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
+        backgroundColor: kIOSTheme.backgroundColor, // this is adjusted from 0xCCF8F8F8 to be opacity 1.0
         middle: new Container(
           child: new Text(
             'Family Members',
@@ -98,7 +87,7 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
         trailing: new Material(
           child: new IconButton(
             icon: new Icon(Icons.add),
-            onPressed: _showDialog,
+            onPressed: _showFullDialog,
           ),
         ),
       ),
