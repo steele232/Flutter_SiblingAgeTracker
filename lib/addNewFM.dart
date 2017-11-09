@@ -12,8 +12,6 @@ import 'notifications.dart';
 import 'theme.dart';
 
 
-// COPIED FROM https://marcinszalek.pl/flutter/flutter-fullscreendialog-tutorial-weighttracker-ii/
-
 class FMSave {
   FMSave(this.name, this.date);
   String name;
@@ -48,10 +46,67 @@ class AddEntryDialogState extends State<AddEntryDialog> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget> [
-              new Divider(height: 89.0,) ,
-              new Text('Add a new little buddy!!'),
-              new TextField(),
-              new TextField(),
+              new Container (
+                padding: new EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 10.0,
+                ),
+                height: 400.0,
+                child: new Column(
+                  children: <Widget>[
+                    new Container(
+                      padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                      child: new TextField(
+                        autocorrect: true,
+                        decoration: new InputDecoration(
+                          hintText: 'Name',
+                          labelText: 'Name',
+                        ),
+                      ),
+                    ),
+                    new Row(
+                      children: <Widget>[
+                        new Expanded(
+                          child: new Container(
+                            padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                            child: new TextField(
+                              decoration: new InputDecoration(
+                                hintText: 'MM',
+                                labelText: 'Month',
+                              ),
+                            ),
+                          ),
+                        ),
+                        new Expanded(
+                          child: new Container(
+                            padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                            child: new TextField(
+                              decoration: new InputDecoration(
+                                hintText: 'MM',
+                                labelText: 'Month',
+                              ),
+                            ),
+                          ),
+                        ),
+                        new Expanded(
+                          child: new Container(
+                            padding: new EdgeInsets.symmetric(horizontal: 10.0),
+                            child: new TextField(
+  //                            maxLines: 2,
+                              decoration: new InputDecoration(
+                                hintText: 'MM',
+                                labelText: 'Month',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+
+                ),
+              ),
+
               new Center(
                 child: new CupertinoButton(
                   child: new Text('Add Family Member'),
@@ -67,19 +122,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
             ]
         ),
       ),
-
-//      appBar: new AppBar(
-//        title: const Text('New entry'),
-//        actions: [
-//          new FlatButton(
-//              onPressed: () {
-//                //TODO: Handle save
-//              },
-//              child: new Text('SAVE',)
-//          ),
-//        ],
-//      ),
-//      body: new Text("Foo"),
     );
   }
 }
