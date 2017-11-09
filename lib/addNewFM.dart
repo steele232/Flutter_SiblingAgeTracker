@@ -141,18 +141,30 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       //RELY ON THE STATE.
 
                     // TODO CHECK TO SEE IF THE INPUT IS VALID.
+                    // 11/09/17 This at least prevents a break in the app.
+                    if ( _nameTextController.text != ''
+                          &&
+                         _monthTextController.text != ''
+                          &&
+                         _dayTextController.text != ''
+                          &&
+                         _yearTextController.text != ''
+                         ) {
 
-                    //pop the FMSave
-                    Navigator.of(context)
-                        .pop(
-                          new FMSave(
-                            _nameTextController.text,
-                            _monthTextController.text + '/' +
-                            _dayTextController.text + '/' +
-                            _yearTextController.text
+                      FMSave save = new FMSave(
+                          _nameTextController.text,
+                          _monthTextController.text + '/' +
+                          _dayTextController.text + '/' +
+                          _yearTextController.text
+                      );
 
-                            ),
-                          );
+                      Navigator.of(context).pop(save);
+                    }
+
+//                    if ( save != null ) {
+                      //pop the FMSave
+
+//                    }
                   },
                 )
               ),
