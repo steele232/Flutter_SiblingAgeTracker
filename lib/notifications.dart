@@ -16,7 +16,7 @@ class NotificationsPageState extends State<NotificationsPage> {
   bool _dayOf;
   bool _dayBefore1;
   bool _dayBefore2;
-  bool _dayBefore3;
+//  bool _dayBefore3;
   bool _wkBefore1;
   bool _wkBefore2;
   bool _monthBefore1;
@@ -28,6 +28,11 @@ class NotificationsPageState extends State<NotificationsPage> {
     _dayOf = false;
     _dayBefore1 = false;
     _dayBefore2 = false;
+    _wkBefore1 = false;
+    _wkBefore2 = false;
+    _monthBefore1 = false;
+    _monthBefore2 = false;
+
   }
 
   @override
@@ -55,33 +60,82 @@ class NotificationsPageState extends State<NotificationsPage> {
             ),
             new Divider(height: 20.0),
             new Expanded(
-  //            type: MaterialType.transparency,
               child: new Column(
                 children: <Widget>[
-                  new ListTile(
-                    subtitle: new Text('Day Of'),
-                    trailing: new CupertinoSwitch(value: _dayOf, onChanged: (bool value) {
-                      setState(() {
-                        _dayOf = value;
-                      });
-                    }),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('Day Of Birthday'),
+                      trailing: new CupertinoSwitch(value: _dayOf, onChanged: (bool value) {
+                        setState(() {
+                          _dayOf = value;
+                        });
+                      }),
+                    ),
                   ),
-                  new ListTile(
-                    subtitle: new Text('Day Before'),
-                    trailing: new CupertinoSwitch(value: _dayBefore1, onChanged: (bool value) {
-                      setState(() {
-                        _dayBefore1 = value;
-                      });
-                    }),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('1 Day Before'),
+                      trailing: new CupertinoSwitch(value: _dayBefore1, onChanged: (bool value) {
+                        setState(() {
+                          _dayBefore1 = value;
+                        });
+                      }),
+                    ),
                   ),
-                  new ListTile(
-                    subtitle: new Text('2 Days Before'),
-                    trailing: new CupertinoSwitch(value: _dayBefore2, onChanged: (bool value) {
-                      setState(() {
-                        _dayBefore2 = value;
-                      });
-                    }),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('2 Days Before'),
+                      trailing: new CupertinoSwitch(value: _dayBefore2, onChanged: (bool value) {
+                        setState(() {
+                          _dayBefore2 = value;
+                        });
+                      }),
+                    ),
                   ),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('1 Week Before'),
+                      trailing: new CupertinoSwitch(value: _wkBefore1, onChanged: (bool value) {
+                        setState(() {
+                          _wkBefore1 = value;
+                        });
+                      }),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('2 Weeks Before'),
+                      trailing: new CupertinoSwitch(value: _wkBefore2, onChanged: (bool value) {
+                        setState(() {
+                          _wkBefore2 = value;
+                        });
+                      }),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('1 Month Before'),
+                      trailing: new CupertinoSwitch(value: _monthBefore1, onChanged: (bool value) {
+                        setState(() {
+                          _monthBefore1 = value;
+                        });
+                      }),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new ListTile(
+                      subtitle: new Text('2 Months Before'),
+                      trailing: new CupertinoSwitch(value: _monthBefore2, onChanged: (bool value) {
+                        setState(() {
+                          _monthBefore2 = value;
+                        });
+                      }),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Divider(height: 20.0),
+                  )
+
 
                 ],
               ),
