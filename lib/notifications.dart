@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'theme.dart';
 
 
 class NotificationsPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return new CupertinoPageScaffold(
       navigationBar: new CupertinoNavigationBar(
+        backgroundColor: kIOSTheme.backgroundColor, // opacity corrected for proper behavior
         middle: new Text(
             'Notifications',
             style: Theme.of(context).textTheme.subhead,
