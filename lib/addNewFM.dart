@@ -24,6 +24,21 @@ class AddEntryDialog extends StatefulWidget {
 }
 
 class AddEntryDialogState extends State<AddEntryDialog> {
+
+  TextEditingController _nameTextController;
+  TextEditingController _monthTextController;
+  TextEditingController _dayTextController;
+  TextEditingController _yearTextController;
+
+  @override
+  void initState() {
+    _nameTextController = new TextEditingController();
+    _monthTextController = new TextEditingController();
+    _dayTextController = new TextEditingController();
+    _yearTextController = new TextEditingController();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return new CupertinoPageScaffold(
@@ -54,15 +69,24 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                 height: 400.0,
                 child: new Column(
                   children: <Widget>[
+                    new Text(
+                      'Name',
+                      textAlign: TextAlign.left,
+                    ),
                     new Container(
                       padding: new EdgeInsets.symmetric(horizontal: 10.0),
                       child: new TextField(
                         autocorrect: true,
+                        controller: _nameTextController,
                         decoration: new InputDecoration(
-                          hintText: 'Name',
+//                          hintText: 'Name',
                           labelText: 'Name',
                         ),
                       ),
+                    ),
+                    new Text(
+                      'Birth Date',
+                      textAlign: TextAlign.left,
                     ),
                     new Row(
                       children: <Widget>[
@@ -70,9 +94,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                           child: new Container(
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
+                              controller: _monthTextController,
                               decoration: new InputDecoration(
                                 hintText: 'MM',
-                                labelText: 'Month',
+                                labelText: 'MM',
                               ),
                             ),
                           ),
@@ -81,9 +106,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                           child: new Container(
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
+                              controller: _dayTextController,
                               decoration: new InputDecoration(
-                                hintText: 'MM',
-                                labelText: 'Month',
+//                                hintText: 'MM',
+                                labelText: 'DD',
                               ),
                             ),
                           ),
@@ -92,10 +118,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                           child: new Container(
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
-  //                            maxLines: 2,
+                              controller: _yearTextController,
                               decoration: new InputDecoration(
-                                hintText: 'MM',
-                                labelText: 'Month',
+//                                hintText: 'MM',
+                                labelText: 'YYYY',
                               ),
                             ),
                           ),
@@ -114,8 +140,19 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     //collect and put into a FMSave
                       //RELY ON THE STATE.
 
+                    // TODO CHECK TO SEE IF THE INPUT IS VALID.
+
                     //pop the FMSave
-                    Navigator.of(context).pop(new FMSave('Jonathan STEELE', '01/05/1995'));
+                    Navigator.of(context)
+                        .pop(
+                          new FMSave(
+                            _nameTextController.text,
+                            _monthTextController.text + '/' +
+                            _dayTextController.text + '/' +
+                            _yearTextController.text
+
+                            ),
+                          );
                   },
                 )
               ),
@@ -124,4 +161,9 @@ class AddEntryDialogState extends State<AddEntryDialog> {
       ),
     );
   }
+
+
+
+
+
 }
