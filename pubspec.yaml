@@ -2,7 +2,6 @@ name: flutter_proto02
 description: Learn it!
 
 dependencies:
-  firebase_messaging: "^0.0.7"
   fluro: "^1.2.1"
   flutter:
     sdk: flutter
