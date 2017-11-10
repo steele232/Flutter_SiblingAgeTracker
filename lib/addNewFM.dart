@@ -24,19 +24,29 @@ class AddEntryDialog extends StatefulWidget {
 
 class AddEntryDialogState extends State<AddEntryDialog> {
 
-  TextEditingController _nameTextController;
-  TextEditingController _monthTextController;
-  TextEditingController _dayTextController;
-  TextEditingController _yearTextController;
+  final TextEditingController _nameTextController = new TextEditingController();
+  final TextEditingController _monthTextController = new TextEditingController();
+  final TextEditingController _dayTextController = new TextEditingController();
+  final TextEditingController _yearTextController = new TextEditingController();
 
   @override
   void initState() {
-    _nameTextController = new TextEditingController();
-    _monthTextController = new TextEditingController();
-    _dayTextController = new TextEditingController();
-    _yearTextController = new TextEditingController();
+    super.initState();
+//    _nameTextController;
+//    _monthTextController;
+//    _dayTextController;
+//    _yearTextController;
   }
 
+
+  @override
+  void dispose() {
+    _nameTextController.dispose();
+    _monthTextController.dispose();
+    _dayTextController.dispose();
+    _yearTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
