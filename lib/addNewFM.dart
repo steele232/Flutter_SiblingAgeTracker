@@ -105,7 +105,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _monthTextController,
                               decoration: new InputDecoration(
-//                                hintText: 'MM',
                                 labelText: 'MM',
                               ),
                             ),
@@ -117,7 +116,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _dayTextController,
                               decoration: new InputDecoration(
-//                                hintText: 'MM',
                                 labelText: 'DD',
                               ),
                             ),
@@ -129,7 +127,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _yearTextController,
                               decoration: new InputDecoration(
-//                                hintText: 'MM',
                                 labelText: 'YYYY',
                               ),
                             ),
