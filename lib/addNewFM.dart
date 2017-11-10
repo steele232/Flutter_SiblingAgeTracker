@@ -39,14 +39,14 @@ class AddEntryDialogState extends State<AddEntryDialog> {
   }
 
 
-  @override
-  void dispose() {
-    _nameTextController.dispose();
-    _monthTextController.dispose();
-    _dayTextController.dispose();
-    _yearTextController.dispose();
-    super.dispose();
-  }
+//  @override
+//  void dispose() {
+////    _nameTextController.dispose();
+////    _monthTextController.dispose();
+////    _dayTextController.dispose();
+////    _yearTextController.dispose();
+//    super.dispose();
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         controller: _nameTextController,
                         decoration: new InputDecoration(
 //                          hintText: 'Name',
-                          labelText: 'Name',
+//                          labelText: 'Name',
                         ),
                       ),
                     ),
@@ -105,8 +105,8 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _monthTextController,
                               decoration: new InputDecoration(
-                                hintText: 'MM',
-                                labelText: 'MM',
+//                                hintText: 'MM',
+//                                labelText: 'MM',
                               ),
                             ),
                           ),
@@ -118,7 +118,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                               controller: _dayTextController,
                               decoration: new InputDecoration(
 //                                hintText: 'MM',
-                                labelText: 'DD',
+//                                labelText: 'DD',
                               ),
                             ),
                           ),
@@ -130,7 +130,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                               controller: _yearTextController,
                               decoration: new InputDecoration(
 //                                hintText: 'MM',
-                                labelText: 'YYYY',
+//                                labelText: 'YYYY',
                               ),
                             ),
                           ),
@@ -170,10 +170,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       Navigator.of(context).pop(save);
                     }
 
-//                    if ( save != null ) {
-                      //pop the FMSave
-
-//                    }
                   },
                 )
               ),
