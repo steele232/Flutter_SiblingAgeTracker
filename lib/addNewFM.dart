@@ -89,7 +89,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         controller: _nameTextController,
                         decoration: new InputDecoration(
 //                          hintText: 'Name',
-//                          labelText: 'Name',
+                          labelText: 'Name',
                         ),
                       ),
                     ),
@@ -106,7 +106,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                               controller: _monthTextController,
                               decoration: new InputDecoration(
 //                                hintText: 'MM',
-//                                labelText: 'MM',
+                                labelText: 'MM',
                               ),
                             ),
                           ),
@@ -118,7 +118,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                               controller: _dayTextController,
                               decoration: new InputDecoration(
 //                                hintText: 'MM',
-//                                labelText: 'DD',
+                                labelText: 'DD',
                               ),
                             ),
                           ),
@@ -130,7 +130,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                               controller: _yearTextController,
                               decoration: new InputDecoration(
 //                                hintText: 'MM',
-//                                labelText: 'YYYY',
+                                labelText: 'YYYY',
                               ),
                             ),
                           ),
