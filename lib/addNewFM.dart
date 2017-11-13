@@ -66,6 +66,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
           ),
       ),
       child: new Material(
+        type: MaterialType.transparency,
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,8 +89,8 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         autocorrect: true,
                         controller: _nameTextController,
                         decoration: new InputDecoration(
-//                          hintText: 'Name',
-                          labelText: 'Name',
+                          hintText: 'Name',
+//                          labelText: 'Name',
                         ),
                       ),
                     ),
@@ -105,7 +106,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _monthTextController,
                               decoration: new InputDecoration(
-                                labelText: 'MM',
+                                hintText: 'MM',
                               ),
                             ),
                           ),
@@ -116,7 +117,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _dayTextController,
                               decoration: new InputDecoration(
-                                labelText: 'DD',
+                                hintText: 'DD',
                               ),
                             ),
                           ),
@@ -127,7 +128,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             child: new TextField(
                               controller: _yearTextController,
                               decoration: new InputDecoration(
-                                labelText: 'YYYY',
+                                hintText: 'YYYY',
                               ),
                             ),
                           ),
