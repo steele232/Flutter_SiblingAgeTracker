@@ -73,25 +73,6 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
 
     if (save != null) {
-//      showDialog(
-//        context: context,
-//        child: new CupertinoAlertDialog(
-//          title: new Text("Edit Details"),
-//          content: new Text("Do you want to edit " + save.name + " with a date of " + save.date + "?"),
-//          actions: <Widget>[
-//            new CupertinoDialogAction(
-//              child: new Text("No"),
-//              onPressed: null,
-//            ),
-//            new CupertinoDialogAction(
-//              child: new Text("Yes"),
-//              isDefaultAction: true,
-//              onPressed: (() { Navigator.pop(context); } ),
-//            ),
-//          ],
-//        ),
-//      );
-
       _addFamilyMemberSave(save);
     }
   }

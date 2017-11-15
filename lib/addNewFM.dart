@@ -32,21 +32,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
   @override
   void initState() {
     super.initState();
-//    _nameTextController;
-//    _monthTextController;
-//    _dayTextController;
-//    _yearTextController;
   }
-
-
-//  @override
-//  void dispose() {
-////    _nameTextController.dispose();
-////    _monthTextController.dispose();
-////    _dayTextController.dispose();
-////    _yearTextController.dispose();
-//    super.dispose();
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +76,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         controller: _nameTextController,
                         decoration: new InputDecoration(
                           hintText: 'Name',
-//                          labelText: 'Name',
                         ),
                       ),
                     ),
@@ -176,9 +161,4 @@ class AddEntryDialogState extends State<AddEntryDialog> {
       ),
     );
   }
-
-
-
-
-
 }
