@@ -11,6 +11,10 @@ import 'notifications.dart';
 import 'theme.dart';
 
 
+var YEAR_MAX = new DateTime.now().year;
+var YEAR_MIN = 1000;
+
+
 class FMSave {
   FMSave(this.name, this.date);
   String name;
@@ -132,27 +136,131 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     //collect and put into a FMSave
                       //RELY ON THE STATE.
 
-                    // TODO CHECK TO SEE IF THE INPUT IS VALID.
-                    // 11/09/17 This at least prevents a break in the app.
-                    if ( _nameTextController.text != ''
-                          &&
-                         _monthTextController.text != ''
-                          &&
-                         _dayTextController.text != ''
-                          &&
-                         _yearTextController.text != ''
-                         ) {
+                    bool nameIsValid = false;
+                    bool monthIsValid = false;
+                    bool dayIsValid = false;
+                    bool yearIsValid = false;
 
+                    /*
+                    Check the name
+                     */
+                    String nameString = _nameTextController.text;
+                    if (
+                      nameString.length > 0 &&
+                      nameString.length < 64
+                    ) {
+                      nameIsValid = true;
+                    }
+
+                    /*
+                    Check the month
+                     */
+                    String monthString = _monthTextController.text;
+                    int monthInt = 0;
+
+
+                    //EXAMPLE:
+                    //var value = int.parse(text, onError: (source) => null);
+
+                    //check that it parses. else fail
+                    monthInt = int.parse(monthString, onError: (source) => null);
+                    //this last line will return null if
+
+                    //check that it's between 1 and 12, else fail.
+                    if (monthInt != null) { //
+                      monthIsValid = (
+                        monthInt < 13 &&
+                        monthInt > 0
+                      );
+                    }
+
+
+                    /*
+                    Check the year - Used for processing leapyears.
+                     */
+                    String yearString = _yearTextController.text;
+                    int yearInt = int.parse(yearString, onError: (source) => null);
+
+                    if (yearInt != null) {
+                      yearIsValid = (
+                        yearInt < YEAR_MAX &&
+                        yearInt > YEAR_MIN
+                      );
+                    }
+
+                    /*
+                    Check the day
+                     */
+                    String dayString = _dayTextController.text;
+                    int dayInt = 0;
+                    //check parsability
+                    dayInt = int.parse(dayString, onError: (source) => null);
+                    // returns null if fails
+
+                    //check range
+                    if (dayInt != null) {
+                      // better handling.
+                      int maxDay = 31;
+                      if (monthInt != null && monthIsValid) {
+                        switch (monthInt)
+                        {
+                          case 1:
+                          case 3:
+                          case 5:
+                          case 7:
+                          case 8:
+                          case 10:
+                          case 12:
+                            maxDay = 31;
+                            break;
+                          case 4:
+                          case 6:
+                          case 9:
+                          case 11:
+                            maxDay = 30;
+                            break;
+                          case 2:
+                            //determine if it's a leapyear
+                            //TODO finish the data validation
+                            //if the year is yet determinable from the year user input
+                            if (monthInt != null &&
+                                yearInt != null &&
+                                monthIsValid) {
+                              if (yearInt % 4 == 0) {
+                                maxDay = 29;
+                              } else {
+                                maxDay = 28;
+                              }
+                            } else {
+                              maxDay = 28;
+                            }
+                            break;
+                          default:
+                            break;
+                        }
+                      }
+                      dayIsValid = (dayInt <= maxDay && dayInt > 0);
+                    }
+
+                    if (
+                      nameIsValid &&
+                      monthIsValid &&
+                      dayIsValid &&
+                      yearIsValid
+                    ) {
+                      //save and pop!
+                      //TODO  switch this from a string to the datetime format
                       FMSave save = new FMSave(
                           _nameTextController.text,
                           _monthTextController.text + '/' +
-                          _dayTextController.text + '/' +
-                          _yearTextController.text
+                              _dayTextController.text + '/' +
+                              _yearTextController.text
                       );
 
                       Navigator.of(context).pop(save);
+                    } else {
+                      //TODO. What about some error feedback??
                     }
-
                   },
                 )
               ),
