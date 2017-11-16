@@ -1,6 +1,6 @@
 
 class AgeCalculator {
-  static void calculateCurrentAge(int year, int month, int day) {
+  static int calculateCurrentAge(DateTime birthdate) {
 
   }
 }

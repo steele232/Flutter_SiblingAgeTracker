@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'familymember.dart';
 import 'package:flutter_proto02/utils/theme.dart';
+import 'package:flutter_proto02/utils/dateFormatter.dart';
+import 'package:flutter_proto02/utils/ageCalculator.dart';
 import 'addNewFM.dart'; //also includes FMSave
 
 
@@ -148,7 +150,14 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String birthdate =
+    String birthdate = DateFormatter.formatUS(
+        familyMember.birthDate.year,
+        familyMember.birthDate.month,
+        familyMember.birthDate.day
+    );
+    int age = AgeCalculator.calculateCurrentAge(
+        familyMember.birthDate
+    );
     return new Material(
       color: Colors.grey[80],
       type: MaterialType.transparency,
@@ -158,9 +167,9 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
             child: new Text(familyMember.name),
         ),
         subtitle: new Text(
-            familyMember.birthDate.toString()
+            birthdate,
         ),
-        trailing: new Text(familyMember.birthDate.toString()),
+        trailing: new Text(age.toString()),
         onTap: _onTap,
       ),
     );
