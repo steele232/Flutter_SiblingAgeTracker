@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
 import 'familymember.dart';
-import 'theme.dart';
+import 'package:flutter_proto02/utils/theme.dart';
 import 'addNewFM.dart'; //also includes FMSave
 
 
@@ -23,31 +23,31 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     _familyMembers = <FamilyMember> [
       new FamilyMember(
         "Jonathan",
-        "01/05/1995",
+        new DateTime(1995, 1, 5),
       ),
       new FamilyMember(
         "Sara",
-        "04/29/1997",
+        new DateTime(1997, 4, 29),
       ),
       new FamilyMember(
         "Stephanie",
-        "02/01/1997",
+        new DateTime(1997, 2, 1),
       ),
       new FamilyMember(
         "Spencer",
-        "07/29/1992",
+        new DateTime(1992, 7, 29),
       ),
       new FamilyMember(
         "Timothy",
-        "07/29/1992",
+        new DateTime(1992, 7, 29),
       ),
       new FamilyMember(
         "Austin",
-        "07/29/1992",
+        new DateTime(1992, 7, 29),
       ),
       new FamilyMember(
         "Elise",
-        "01/16/1988",
+        new DateTime(1988, 1, 16),
       ),
     ];
 
@@ -148,6 +148,7 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
 
   @override
   Widget build(BuildContext context) {
+    String birthdate =
     return new Material(
       color: Colors.grey[80],
       type: MaterialType.transparency,
@@ -156,8 +157,10 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
         title: new Container(
             child: new Text(familyMember.name),
         ),
-        subtitle: new Text(familyMember.birthDate),
-        trailing: new Text(familyMember.birthDate),
+        subtitle: new Text(
+            familyMember.birthDate.toString()
+        ),
+        trailing: new Text(familyMember.birthDate.toString()),
         onTap: _onTap,
       ),
     );

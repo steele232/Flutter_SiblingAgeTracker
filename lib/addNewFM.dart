@@ -8,7 +8,7 @@ import 'package:fluro/fluro.dart';
 import 'family.dart';
 import 'familymember.dart';
 import 'notifications.dart';
-import 'theme.dart';
+import 'package:flutter_proto02/utils/theme.dart';
 
 
 var YEAR_MAX = new DateTime.now().year;
@@ -18,7 +18,7 @@ var YEAR_MIN = 1000;
 class FMSave {
   FMSave(this.name, this.date);
   String name;
-  String date;
+  DateTime date;
 }
 
 class AddEntryDialog extends StatefulWidget {
@@ -250,16 +250,18 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     ) {
                       //save and pop!
                       //TODO  switch this from a string to the datetime format
+
+                      DateTime newBirthday = new DateTime(yearInt, monthInt, dayInt);
+
                       FMSave save = new FMSave(
                           _nameTextController.text,
-                          _monthTextController.text + '/' +
-                              _dayTextController.text + '/' +
-                              _yearTextController.text
+                          newBirthday.toLocal(),
                       );
 
                       Navigator.of(context).pop(save);
                     } else {
                       //TODO. What about some error feedback??
+                      //show User Valid Inputs
                     }
                   },
                 )

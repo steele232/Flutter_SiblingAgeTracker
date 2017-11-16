@@ -6,7 +6,7 @@ import 'package:fluro/fluro.dart';
 //my own imports
 import 'family.dart';
 import 'notifications.dart';
-import 'theme.dart';
+import 'package:flutter_proto02/utils/theme.dart';
 
 
 

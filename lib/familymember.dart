@@ -8,6 +8,6 @@ class FamilyMember {
   FamilyMember(this.name, this.birthDate);
 
   String name;
-  String birthDate;
+  DateTime birthDate;
 
 }

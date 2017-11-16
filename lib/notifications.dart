@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'theme.dart';
+import 'package:flutter_proto02/utils/theme.dart';
 
 
 class NotificationsPage extends StatefulWidget {
