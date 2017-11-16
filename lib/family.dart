@@ -164,12 +164,22 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
       child: new ListTile(
         leading: new CircleAvatar(child: new Text(familyMember.name.substring(0, 1)),),
         title: new Container(
-            child: new Text(familyMember.name),
+            child: new Text(
+              familyMember.name,
+              style: new TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
         ),
         subtitle: new Text(
             birthdate,
         ),
-        trailing: new Text(age.toString()),
+        trailing: new Text(
+          age.toString() + ' years old',
+          style: new TextStyle(
+            fontWeight: FontWeight.normal,
+          ),
+        ),
         onTap: _onTap,
       ),
     );
