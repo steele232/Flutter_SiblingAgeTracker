@@ -54,10 +54,8 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     ];
 
     //TODO SORT the family members by upcoming date so that they are in good order.
-    //TODO Get the Date function working properly
-//    _familyMembers.sort(((a, b) => {  ));
-//    _familyMembers.sort((a, b) => a.name.compareTo(b.name));
-    _familyMembers.sort((a, b) => a.birthDate.compareTo(b.birthDate));
+    _familyMembers.sort((a, b) => b.daysUntilNextBirthday.compareTo(a.daysUntilNextBirthday));
+
 
   }
 
