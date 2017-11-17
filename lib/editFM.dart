@@ -150,7 +150,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
 
               new Center(
                   child: new CupertinoButton(
-                    child: new Text('Add Family Member'),
+                    child: new Text('Edit Family Member'),
                     onPressed: () {
                       //collect and put into a FMSave
                       //RELY ON THE STATE.
