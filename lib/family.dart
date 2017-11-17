@@ -7,6 +7,7 @@ import 'package:flutter_proto02/utils/theme.dart';
 import 'package:flutter_proto02/utils/dateFormatter.dart';
 import 'package:flutter_proto02/utils/ageCalculator.dart';
 import 'addNewFM.dart'; //also includes FMSave
+import 'editFM.dart';
 
 
 class FamilyMemberPage extends StatefulWidget {
@@ -113,7 +114,7 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
       child: new ListView(
         children: _familyMembers.map((FamilyMember familyMember) {
-          return new FamilyMemberWidget(familyMember: familyMember,);
+          return new FamilyMemberWidget(familyMember: familyMember, idx: _familyMembers.indexOf(familyMember),);
         }).toList(),
       ),
     );
@@ -133,17 +134,19 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
 
 class FamilyMemberWidget extends StatefulWidget {
-  FamilyMemberWidget({Key key, this.familyMember}) : super(key: key);
+  FamilyMemberWidget({Key key, this.familyMember, this.idx}) : super(key: key);
 
   final FamilyMember familyMember;
+  final int idx;
 
   @override
-  FamilyMemberWidgetState createState() => new FamilyMemberWidgetState(familyMember: familyMember);
+  FamilyMemberWidgetState createState() => new FamilyMemberWidgetState(familyMember: familyMember, idx: idx);
 }
 
 class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
-  FamilyMemberWidgetState({Key key, this.familyMember});
+  FamilyMemberWidgetState({Key key, this.familyMember, this.idx});
 
+  final int idx;
   final FamilyMember familyMember;
 
   @override
@@ -178,41 +181,76 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
             fontWeight: FontWeight.normal,
           ),
         ),
-        onTap: _onTap,
+        onTap: () {
+          Navigator.push(context,
+            new CupertinoPageRoute<FMSave>(
+              builder: (BuildContext context) {
+                return new EditEntryDialog(idx); //Will need to change name later as we go on.
+              },
+              //        maintainState: true,
+              fullscreenDialog: true,
+            )
+          );
+        },
       ),
     );
   }
-
-  /*
-  TODO Dialog for Editing a Family Member
-   */
-  void _sayYes() {
-    Navigator.pop(context);
-    //
-  }
-  void _sayNo() {
-    Navigator.pop(context);
-  }
-
-  void _onTap() {
-    showDialog(
-      context: context,
-      child: new CupertinoAlertDialog(
-        title: new Text("Edit Details"),
-        content: new Text("Do you want to edit " + familyMember.name + "?"),
-        actions: <Widget>[
-          new CupertinoDialogAction(
-            child: new Text("No"),
-            onPressed: _sayNo,
-          ),
-          new CupertinoDialogAction(
-            child: new Text("Yes"),
-            isDefaultAction: true,
-            onPressed: _sayYes,
-          ),
-        ],
-      ),
-    );
-  }
+//
+//  /*
+//  TODO Dialog for Editing a Family Member
+//   */
+//  void _sayYes(int idx)  {
+//    Navigator.pop(context); //close the edit dialog;
+//
+//    FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
+//      builder: (BuildContext context) {
+//        return new EditEntryDialog(idx); //Will need to change name later as we go on.
+//      },
+////        maintainState: true,
+//      fullscreenDialog: true,
+//    ));
+//
+//
+//
+//    if (save != null) {
+//
+////      _addFamilyMemberSave(save);
+//    }
+//    //
+//  }
+//
+//  void _sayNo() {
+//    Navigator.pop(context);
+//  }
+//
+//  void _onTap(int idx) {
+//    showDialog(
+//      context: context,
+//      child: new CupertinoAlertDialog(
+//        title: new Text("Edit ${familyMember.name}?"),
+//        content: new Text("Do you want to edit ${familyMember.name}'s\n name or birthdate?"),
+//        actions: <Widget>[
+//          new CupertinoDialogAction(
+//            child: new Text("Cancel"),
+//            onPressed: _sayNo,
+//          ),
+//          new CupertinoDialogAction(
+//            child: new Text("Edit"),
+//            isDefaultAction: true,
+//            onPressed: () => {
+//              Navigator.of(context).push(
+//                new CupertinoPageRoute<FMSave>(
+//                  builder: (BuildContext context) {
+//                    return new EditEntryDialog(idx); //Will need to change name later as we go on.
+//                  },
+//            //        maintainState: true,
+//                  fullscreenDialog: true,
+//                ));
+//            },
+//          ),
+//        ],
+//      ),
+//    );
+//  }
 }
 
