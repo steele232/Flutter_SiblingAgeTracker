@@ -24,28 +24,37 @@ class EditFMSave {
 }
 
 class EditEntryDialog extends StatefulWidget {
-  EditEntryDialog(this.idx);
+  EditEntryDialog({this.idx, this.familyMember });
 
+  final FamilyMember familyMember;
   final int idx;
   @override
   EditEntryDialogState createState() {
-    return new EditEntryDialogState(idx);
+    return new EditEntryDialogState(idx: idx, familyMember: familyMember);
   }
 }
 
 class EditEntryDialogState extends State<EditEntryDialog> {
 
-  EditEntryDialogState(this.idx);
+  EditEntryDialogState({this.idx, this.familyMember, });
 
   final TextEditingController _nameTextController = new TextEditingController();
   final TextEditingController _monthTextController = new TextEditingController();
   final TextEditingController _dayTextController = new TextEditingController();
   final TextEditingController _yearTextController = new TextEditingController();
   final int idx;
+  final FamilyMember familyMember;
 
   @override
   void initState() {
     super.initState();
+
+    //populate the fields because we are editing the family member.
+    _nameTextController.text = familyMember.name;
+    _monthTextController.text = familyMember.birthDate.month.toString();
+    _dayTextController.text = familyMember.birthDate.day.toString();
+    _yearTextController.text = familyMember.birthDate.year.toString();
+
   }
 
   @override
@@ -61,7 +70,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
               })
           ),
         ),
-        middle: new Text('Add Family Member',
+        middle: new Text('Edit Family Member',
           style: Theme.of(context).textTheme.subhead,
         ),
       ),

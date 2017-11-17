@@ -204,7 +204,7 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
           Navigator.push(context,
             new CupertinoPageRoute<EditFMSave>(
               builder: (BuildContext context) {
-                return new EditEntryDialog(idx); //Will need to change name later as we go on.
+                return new EditEntryDialog(idx: idx, familyMember: familyMember,); //Will need to change name later as we go on.
               },
               //        maintainState: true,
               fullscreenDialog: true,
