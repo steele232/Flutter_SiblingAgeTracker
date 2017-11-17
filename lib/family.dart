@@ -131,12 +131,6 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
     );
   }
 
-//  Widget _itemBuilder (BuildContext context, int index) {
-//    FamilyMember familyMember = getFM(index);
-//
-//    return new FamilyMemberWidget(familyMember: familyMember);
-//  }
-
   FamilyMember getFM(int index) {
     return _familyMembers[index];
   }
@@ -200,82 +194,48 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
             fontWeight: FontWeight.normal,
           ),
         ),
-        onTap: () {
-          Navigator.push(context,
-            new CupertinoPageRoute<EditFMSave>(
-              builder: (BuildContext context) {
-                return new EditEntryDialog(idx: idx, familyMember: familyMember,); //Will need to change name later as we go on.
-              },
-              //        maintainState: true,
-              fullscreenDialog: true,
-            )
+        onTap:(() {
+          showDialog(
+            context: context,
+            child: new CupertinoAlertDialog(
+              title: new Text("Edit ${familyMember.name}?"),
+              content: new Text("Do you want to edit ${familyMember.name}'s\n name or birthdate?"),
+              actions: <Widget>[
+                new CupertinoDialogAction(
+                  child: new Text("Cancel"),
+                  onPressed: (() {
+                    Navigator.pop(context);
+                  }),
+                ),
+                new CupertinoDialogAction(
+                  child: new Text("Edit"),
+                  isDefaultAction: true,
+                  onPressed: (() {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                      new CupertinoPageRoute<EditFMSave>(
+                        builder: (BuildContext context) {
+                          return new EditEntryDialog(idx: idx, familyMember: familyMember,); //Will need to change name later as we go on.
+                        },
+                        //        maintainState: true,
+                        fullscreenDialog: true,
+                      )
 
-          ).then((EditFMSave save) {
-            if (save != null) {
-              callback(save, idx);
-            }
+                    ).then((EditFMSave save) {
+                      if (save != null) {
+                        callback(save, idx);
+                      }
 
-          });
-        },
+                    });
+                  }),
+                ),
+              ],
+            ),
+          );
+
+        }),
       ),
     );
   }
-//
-//  /*
-//  TODO Dialog for Editing a Family Member
-//   */
-//  void _sayYes(int idx)  {
-//    Navigator.pop(context); //close the edit dialog;
-//
-//    FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
-//      builder: (BuildContext context) {
-//        return new EditEntryDialog(idx); //Will need to change name later as we go on.
-//      },
-////        maintainState: true,
-//      fullscreenDialog: true,
-//    ));
-//
-//
-//
-//    if (save != null) {
-//
-////      _addFamilyMemberSave(save);
-//    }
-//    //
-//  }
-//
-//  void _sayNo() {
-//    Navigator.pop(context);
-//  }
-//
-//  void _onTap(int idx) {
-//    showDialog(
-//      context: context,
-//      child: new CupertinoAlertDialog(
-//        title: new Text("Edit ${familyMember.name}?"),
-//        content: new Text("Do you want to edit ${familyMember.name}'s\n name or birthdate?"),
-//        actions: <Widget>[
-//          new CupertinoDialogAction(
-//            child: new Text("Cancel"),
-//            onPressed: _sayNo,
-//          ),
-//          new CupertinoDialogAction(
-//            child: new Text("Edit"),
-//            isDefaultAction: true,
-//            onPressed: () => {
-//              Navigator.of(context).push(
-//                new CupertinoPageRoute<FMSave>(
-//                  builder: (BuildContext context) {
-//                    return new EditEntryDialog(idx); //Will need to change name later as we go on.
-//                  },
-//            //        maintainState: true,
-//                  fullscreenDialog: true,
-//                ));
-//            },
-//          ),
-//        ],
-//      ),
-//    );
-//  }
 }
 
