@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:fluro/fluro.dart';
-
 //my own imports
 import 'family.dart';
 import 'notifications.dart';

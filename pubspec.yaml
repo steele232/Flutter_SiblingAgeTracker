@@ -2,7 +2,8 @@ name: flutter_proto02
 description: Learn it!
 
 dependencies:
-  fluro: "^1.2.1"
+  path_provider: "^0.2.1+1"
+
   flutter:
     sdk: flutter
 

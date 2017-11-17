@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
-import 'package:fluro/fluro.dart';
-
 //my own imports
 import 'family.dart';
 import 'familymember.dart';
