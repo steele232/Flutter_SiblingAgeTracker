@@ -258,8 +258,6 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                           yearIsValid
                       ) {
                         //save and pop!
-                        //TODO  switch this from a string to the datetime format
-
                         DateTime newBirthday = new DateTime(yearInt, monthInt, dayInt);
 
                         EditFMSave save = new EditFMSave(

@@ -54,14 +54,13 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
       ),
     ];
 
-    //TODO SORT the family members by upcoming date so that they are in good order.
+    //SORT the family members by upcoming date so that they are in good order.
     _familyMembers.sort((a, b) => b.daysUntilNextBirthday.compareTo(a.daysUntilNextBirthday));
 
 
   }
 
 
-  //TODO: Create a dialog for Adding a family member..
   Future _showFullAddDialog() async {
     FMSave save = await Navigator.of(context).push(new CupertinoPageRoute<FMSave>(
         builder: (BuildContext context) {
@@ -213,7 +212,6 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
 
           ).then((EditFMSave save) {
             if (save != null) {
-              //TODO save the changes.
               callback(save, idx);
             }
 

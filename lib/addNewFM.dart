@@ -221,7 +221,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             break;
                           case 2:
                             //determine if it's a leapyear
-                            //TODO finish the data validation
                             //if the year is yet determinable from the year user input
                             if (monthInt != null &&
                                 yearInt != null &&
@@ -249,7 +248,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       yearIsValid
                     ) {
                       //save and pop!
-                      //TODO  switch this from a string to the datetime format
 
                       DateTime newBirthday = new DateTime(yearInt, monthInt, dayInt);
 
