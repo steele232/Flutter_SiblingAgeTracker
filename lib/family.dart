@@ -114,7 +114,19 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
       child: new ListView(
         children: _familyMembers.map((FamilyMember familyMember) {
-          return new FamilyMemberWidget(familyMember: familyMember, idx: _familyMembers.indexOf(familyMember),);
+          return new FamilyMemberWidget(familyMember: familyMember,
+            idx: _familyMembers.indexOf(familyMember),
+            callback: ((EditFMSave save, int idx) {
+              if (save != null) {
+                setState(() {
+                  _familyMembers.elementAt(idx).name = save.name;
+                  _familyMembers.elementAt(idx).birthDate = save.date;
+                });
+              } // else do nothing.
+
+              //and always pop that info.
+            }),
+          );
         }).toList(),
       ),
     );
@@ -134,20 +146,28 @@ class FamilyMemberPageState extends State<FamilyMemberPage> {
 
 
 class FamilyMemberWidget extends StatefulWidget {
-  FamilyMemberWidget({Key key, this.familyMember, this.idx}) : super(key: key);
+  FamilyMemberWidget({Key key, this.familyMember, this.idx, this.callback}) : super(key: key);
 
   final FamilyMember familyMember;
   final int idx;
+  final Function(EditFMSave, int idx) callback;
 
   @override
-  FamilyMemberWidgetState createState() => new FamilyMemberWidgetState(familyMember: familyMember, idx: idx);
+  FamilyMemberWidgetState createState() =>
+      new FamilyMemberWidgetState(
+        familyMember: familyMember,
+        idx: idx,
+        callback: callback,
+      );
 }
 
 class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
-  FamilyMemberWidgetState({Key key, this.familyMember, this.idx});
+  FamilyMemberWidgetState({Key key, this.familyMember, this.idx, this.callback});
 
   final int idx;
   final FamilyMember familyMember;
+  final Function(EditFMSave, int idx) callback;
+
 
   @override
   Widget build(BuildContext context) {
@@ -183,14 +203,21 @@ class FamilyMemberWidgetState extends State<FamilyMemberWidget> {
         ),
         onTap: () {
           Navigator.push(context,
-            new CupertinoPageRoute<FMSave>(
+            new CupertinoPageRoute<EditFMSave>(
               builder: (BuildContext context) {
                 return new EditEntryDialog(idx); //Will need to change name later as we go on.
               },
               //        maintainState: true,
               fullscreenDialog: true,
             )
-          );
+
+          ).then((EditFMSave save) {
+            if (save != null) {
+              //TODO save the changes.
+              callback(save, idx);
+            }
+
+          });
         },
       ),
     );

@@ -231,7 +231,6 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                               break;
                             case 2:
                             //determine if it's a leapyear
-                            //TODO finish the data validation
                             //if the year is yet determinable from the year user input
                               if (monthInt != null &&
                                   yearInt != null &&
