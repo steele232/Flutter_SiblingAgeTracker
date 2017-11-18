@@ -31,6 +31,14 @@ class AddEntryDialogState extends State<AddEntryDialog> {
   final TextEditingController _dayTextController = new TextEditingController();
   final TextEditingController _yearTextController = new TextEditingController();
 
+  String _error;
+  bool _hasError = false;
+
+  bool _nameIsValid = true;
+  bool _monthIsValid = true;
+  bool _dayIsValid = true;
+  bool _yearIsValid = true;
+
   @override
   void initState() {
     super.initState();
@@ -64,7 +72,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                   horizontal: 20.0,
                   vertical: 10.0,
                 ),
-                height: 400.0,
+                height: 350.0,
                 child: new Column(
                   children: <Widget>[
                     new Text(
@@ -72,10 +80,16 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       textAlign: TextAlign.left,
                     ),
                     new Container(
+                      color:
+                        _nameIsValid ?
+                          const Color(0x00000000) :
+                          const Color(0xAFFF3B30),
                       padding: new EdgeInsets.symmetric(horizontal: 10.0),
                       child: new TextField(
                         autocorrect: true,
+
                         controller: _nameTextController,
+
                         decoration: new InputDecoration(
                           hintText: 'Name',
                         ),
@@ -88,7 +102,12 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     new Row(
                       children: <Widget>[
                         new Expanded(
+
                           child: new Container(
+                            color:
+                              _monthIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _monthTextController,
@@ -100,6 +119,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         ),
                         new Expanded(
                           child: new Container(
+                            color:
+                              _dayIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _dayTextController,
@@ -111,6 +134,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                         ),
                         new Expanded(
                           child: new Container(
+                            color:
+                              _yearIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _yearTextController,
@@ -128,16 +155,41 @@ class AddEntryDialogState extends State<AddEntryDialog> {
               ),
 
               new Center(
+                child: new Text(
+
+                  _hasError ?
+                      'Invalid date or name' :
+                      'No Error', //should never see this
+
+                  style: new TextStyle(
+                    color:
+                      _hasError ?
+                        CupertinoColors.destructiveRed :
+                        const Color(0x00000000),
+                  ),
+
+
+
+                ),
+              ),
+
+              new Center(
                 child: new CupertinoButton(
-                  child: new Text('Add Family Member'),
+                  child: new Text(
+                    'Add Family Member',
+                    style: new TextStyle(
+//                      fontSize: 1.3,
+
+                    ),
+                  ),
                   onPressed: () {
                     //collect and put into a FMSave
                       //RELY ON THE STATE.
 
-                    bool nameIsValid = false;
-                    bool monthIsValid = false;
-                    bool dayIsValid = false;
-                    bool yearIsValid = false;
+                    _nameIsValid = false;
+                    _monthIsValid = false;
+                    _dayIsValid = false;
+                    _yearIsValid = false;
 
                     /*
                     Check the name
@@ -147,7 +199,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       nameString.length > 0 &&
                       nameString.length < 64
                     ) {
-                      nameIsValid = true;
+                      _nameIsValid = true;
                     }
 
                     /*
@@ -166,7 +218,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
 
                     //check that it's between 1 and 12, else fail.
                     if (monthInt != null) { //
-                      monthIsValid = (
+                      _monthIsValid = (
                         monthInt < 13 &&
                         monthInt > 0
                       );
@@ -180,7 +232,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     int yearInt = int.parse(yearString, onError: (source) => null);
 
                     if (yearInt != null) {
-                      yearIsValid = (
+                      _yearIsValid = (
                         yearInt < YEAR_MAX &&
                         yearInt > YEAR_MIN
                       );
@@ -199,7 +251,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                     if (dayInt != null) {
                       // better handling.
                       int maxDay = 31;
-                      if (monthInt != null && monthIsValid) {
+                      if (monthInt != null && _monthIsValid) {
                         switch (monthInt)
                         {
                           case 1:
@@ -222,7 +274,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             //if the year is yet determinable from the year user input
                             if (monthInt != null &&
                                 yearInt != null &&
-                                monthIsValid) {
+                                _monthIsValid) {
                               if (yearInt % 4 == 0) {
                                 maxDay = 29;
                               } else {
@@ -236,16 +288,17 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                             break;
                         }
                       }
-                      dayIsValid = (dayInt <= maxDay && dayInt > 0);
+                      _dayIsValid = (dayInt <= maxDay && dayInt > 0);
                     }
 
                     if (
-                      nameIsValid &&
-                      monthIsValid &&
-                      dayIsValid &&
-                      yearIsValid
+                      _nameIsValid &&
+                      _monthIsValid &&
+                      _dayIsValid &&
+                      _yearIsValid
                     ) {
                       //save and pop!
+                      _hasError = false; // unnecessary, but whatever.
 
                       DateTime newBirthday = new DateTime(yearInt, monthInt, dayInt);
 
@@ -256,7 +309,10 @@ class AddEntryDialogState extends State<AddEntryDialog> {
 
                       Navigator.of(context).pop(save);
                     } else {
-                      //TODO. What about some error feedback??
+                      setState(() {
+                        //Error Reedback
+                        _hasError = true;
+                      });
                       //show User Valid Inputs
                     }
                   },
