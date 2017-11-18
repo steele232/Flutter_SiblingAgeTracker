@@ -31,7 +31,6 @@ class AddEntryDialogState extends State<AddEntryDialog> {
   final TextEditingController _dayTextController = new TextEditingController();
   final TextEditingController _yearTextController = new TextEditingController();
 
-  String _error;
   bool _hasError = false;
 
   bool _nameIsValid = true;
@@ -310,7 +309,7 @@ class AddEntryDialogState extends State<AddEntryDialog> {
                       Navigator.of(context).pop(save);
                     } else {
                       setState(() {
-                        //Error Reedback
+                        //Error Feedback
                         _hasError = true;
                       });
                       //show User Valid Inputs

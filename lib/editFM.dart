@@ -43,6 +43,14 @@ class EditEntryDialogState extends State<EditEntryDialog> {
   final int idx;
   final FamilyMember familyMember;
 
+  bool _hasError = false;
+
+  bool _nameIsValid = true;
+  bool _monthIsValid = true;
+  bool _dayIsValid = true;
+  bool _yearIsValid = true;
+
+
   @override
   void initState() {
     super.initState();
@@ -91,6 +99,10 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                       textAlign: TextAlign.left,
                     ),
                     new Container(
+                      color:
+                        _nameIsValid ?
+                          const Color(0x00000000) :
+                          const Color(0xAFFF3B30),
                       padding: new EdgeInsets.symmetric(horizontal: 10.0),
                       child: new TextField(
                         autocorrect: true,
@@ -108,6 +120,10 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                       children: <Widget>[
                         new Expanded(
                           child: new Container(
+                            color:
+                              _monthIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _monthTextController,
@@ -119,6 +135,11 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                         ),
                         new Expanded(
                           child: new Container(
+                            color:
+                              _dayIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
+
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _dayTextController,
@@ -130,6 +151,11 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                         ),
                         new Expanded(
                           child: new Container(
+                            color:
+                              _yearIsValid ?
+                                const Color(0x00000000) :
+                                const Color(0xAFFF3B30),
+
                             padding: new EdgeInsets.symmetric(horizontal: 10.0),
                             child: new TextField(
                               controller: _yearTextController,
@@ -147,16 +173,35 @@ class EditEntryDialogState extends State<EditEntryDialog> {
               ),
 
               new Center(
+                child: new Text(
+
+                  _hasError ?
+                  'Invalid date or name' :
+                  'No Error', //should never see this
+
+                  style: new TextStyle(
+                    color:
+                    _hasError ?
+                    CupertinoColors.destructiveRed :
+                    const Color(0x00000000),
+                  ),
+
+
+
+                ),
+              ),
+
+              new Center(
                   child: new CupertinoButton(
                     child: new Text('Edit Family Member'),
                     onPressed: () {
                       //collect and put into a FMSave
                       //RELY ON THE STATE.
 
-                      bool nameIsValid = false;
-                      bool monthIsValid = false;
-                      bool dayIsValid = false;
-                      bool yearIsValid = false;
+                      _nameIsValid = false;
+                      _monthIsValid = false;
+                      _dayIsValid = false;
+                      _yearIsValid = false;
 
                       /*
                     Check the name
@@ -166,7 +211,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                       nameString.length > 0 &&
                           nameString.length < 64
                       ) {
-                        nameIsValid = true;
+                        _nameIsValid = true;
                       }
 
                       /*
@@ -185,7 +230,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
 
                       //check that it's between 1 and 12, else fail.
                       if (monthInt != null) { //
-                        monthIsValid = (
+                        _monthIsValid = (
                             monthInt < 13 &&
                                 monthInt > 0
                         );
@@ -199,7 +244,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                       int yearInt = int.parse(yearString, onError: (source) => null);
 
                       if (yearInt != null) {
-                        yearIsValid = (
+                        _yearIsValid = (
                             yearInt < YEAR_MAX &&
                                 yearInt > YEAR_MIN
                         );
@@ -218,7 +263,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                       if (dayInt != null) {
                         // better handling.
                         int maxDay = 31;
-                        if (monthInt != null && monthIsValid) {
+                        if (monthInt != null && _monthIsValid) {
                           switch (monthInt)
                           {
                             case 1:
@@ -241,7 +286,7 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                             //if the year is yet determinable from the year user input
                               if (monthInt != null &&
                                   yearInt != null &&
-                                  monthIsValid) {
+                                  _monthIsValid) {
                                 if (yearInt % 4 == 0) {
                                   maxDay = 29;
                                 } else {
@@ -255,14 +300,14 @@ class EditEntryDialogState extends State<EditEntryDialog> {
                               break;
                           }
                         }
-                        dayIsValid = (dayInt <= maxDay && dayInt > 0);
+                        _dayIsValid = (dayInt <= maxDay && dayInt > 0);
                       }
 
                       if (
-                      nameIsValid &&
-                          monthIsValid &&
-                          dayIsValid &&
-                          yearIsValid
+                          _nameIsValid &&
+                          _monthIsValid &&
+                          _dayIsValid &&
+                          _yearIsValid
                       ) {
                         //save and pop!
                         DateTime newBirthday = new DateTime(yearInt, monthInt, dayInt);
@@ -275,7 +320,10 @@ class EditEntryDialogState extends State<EditEntryDialog> {
 
                         Navigator.of(context).pop(save);
                       } else {
-                        //TODO. What about some error feedback??
+                        setState(() {
+                          //Error Feedback
+                          _hasError = true;
+                        });
                         //show User Valid Inputs
                       }
                     },
