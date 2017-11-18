@@ -51,7 +51,13 @@ class NotificationsPageState extends State<NotificationsPage> {
         child: new Column(
           children: <Widget>[
             new ListTile(
-              subtitle: new Text('Birthday Notifications'), //TODO IMPROVE THIS TYPOGRAPHY / SIZE / DARKNESS.
+              subtitle: new Text(
+                'Birthday Notifications',
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: CupertinoColors.black,
+                ),
+              ),
               trailing: new CupertinoSwitch(value: _birthdayIsOn, onChanged: (bool value) {
                 setState(() {
                   _birthdayIsOn = value;
@@ -64,74 +70,305 @@ class NotificationsPageState extends State<NotificationsPage> {
                 children: <Widget>[
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('Day Of Birthday'),
-                      trailing: new CupertinoSwitch(value: _dayOf, onChanged: (bool value) {
-                        setState(() {
-                          _dayOf = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            'Day Of Birthday',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              'Day Of Birthday'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _dayOf,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _dayOf = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('1 Day Before'),
-                      trailing: new CupertinoSwitch(value: _dayBefore1, onChanged: (bool value) {
-                        setState(() {
-                          _dayBefore1 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '1 Day Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '1 Day Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _dayBefore1,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _dayBefore1 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('2 Days Before'),
-                      trailing: new CupertinoSwitch(value: _dayBefore2, onChanged: (bool value) {
-                        setState(() {
-                          _dayBefore2 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '2 Day Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '2 Day Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _dayBefore2,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _dayBefore2 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('1 Week Before'),
-                      trailing: new CupertinoSwitch(value: _wkBefore1, onChanged: (bool value) {
-                        setState(() {
-                          _wkBefore1 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '1 Week Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '1 Week Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _wkBefore1,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _wkBefore1 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('2 Weeks Before'),
-                      trailing: new CupertinoSwitch(value: _wkBefore2, onChanged: (bool value) {
-                        setState(() {
-                          _wkBefore2 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '2 Weeks Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '2 Weeks Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _wkBefore2,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _wkBefore2 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('1 Month Before'),
-                      trailing: new CupertinoSwitch(value: _monthBefore1, onChanged: (bool value) {
-                        setState(() {
-                          _monthBefore1 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '1 Month Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '1 Month Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _monthBefore1,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _monthBefore1 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
                   new Expanded(
                     child: new ListTile(
-                      subtitle: new Text('2 Months Before'),
-                      trailing: new CupertinoSwitch(value: _monthBefore2, onChanged: (bool value) {
-                        setState(() {
-                          _monthBefore2 = value;
-                        });
-                      }),
+                      enabled: _birthdayIsOn,
+                      subtitle:
+                        _birthdayIsOn ?
+                          new Text(
+                            '2 Months Before',
+                            style: new TextStyle(
+                              color: CupertinoColors.black
+                            ),
+                          ) :
+                          new Text(
+                              '2 Months Before'
+                          ),
+                      trailing: new CupertinoSwitch(
+                        value: _monthBefore2,
+                        activeColor:
+                          _birthdayIsOn ?
+                            CupertinoColors.activeGreen
+                              :
+                            CupertinoColors.inactiveGray,
+                        onChanged: (bool value) {
+                          if (_birthdayIsOn) {
+                            setState(() {
+                              _monthBefore2 = value;
+                            });
+                          }
+                        }
+                      ),
                     ),
                   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('Day Of Birthday'),
+//                      trailing: new CupertinoSwitch(value: _dayOf, onChanged: (bool value) {
+//                        setState(() {
+//                          _dayOf = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('1 Day Before'),
+//                      trailing: new CupertinoSwitch(value: _dayBefore1, onChanged: (bool value) {
+//                        setState(() {
+//                          _dayBefore1 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('2 Days Before'),
+//                      trailing: new CupertinoSwitch(value: _dayBefore2, onChanged: (bool value) {
+//                        setState(() {
+//                          _dayBefore2 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('1 Week Before'),
+//                      trailing: new CupertinoSwitch(value: _wkBefore1, onChanged: (bool value) {
+//                        setState(() {
+//                          _wkBefore1 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('2 Weeks Before'),
+//                      trailing: new CupertinoSwitch(value: _wkBefore2, onChanged: (bool value) {
+//                        setState(() {
+//                          _wkBefore2 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('1 Month Before'),
+//                      trailing: new CupertinoSwitch(value: _monthBefore1, onChanged: (bool value) {
+//                        setState(() {
+//                          _monthBefore1 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
+//                  new Expanded(
+//                    child: new ListTile(
+//                      subtitle: new Text('2 Months Before'),
+//                      trailing: new CupertinoSwitch(value: _monthBefore2, onChanged: (bool value) {
+//                        setState(() {
+//                          _monthBefore2 = value;
+//                        });
+//                      }),
+//                    ),
+//                  ),
                   new Expanded(
                     child: new Divider(height: 20.0),
                   )
