@@ -2,7 +2,7 @@ name: flutter_proto02
 description: Learn it!
 
 dependencies:
-  path_provider: "^0.2.1+1"
+#  path_provider: "^0.2.1+1"
 
   flutter:
     sdk: flutter
